@@ -85,8 +85,11 @@ namespace SQL2NonSQLConverter
                             SqlCommand sqlCMD = new SqlCommand(sql, m_sqlCnn.sqlCNN);
                             SqlDataReader sqlReader = sqlCMD.ExecuteReader(CommandBehavior.KeyInfo);
                             DataTable schemaDataType = sqlReader.GetSchemaTable();
-                            foreach (DataRow type in schemaDataType.Rows)
+                            
+                            //foreach (DataRow type in schemaDataType.Rows)
+                            if (schemaDataType.Rows.Count > 0)
                             {
+                                DataRow type = schemaDataType.Rows[0];
                                 foreach (DataColumn property in schemaDataType.Columns)
                                 {
                                     Debug.WriteLine(property.ColumnName + " : " + type[property].ToString());

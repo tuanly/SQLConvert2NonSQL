@@ -42,8 +42,8 @@ namespace SQL2NonSQLConverter
 
         public void CloseSQLServerConnection()
         {
-            if (mSQLServerCnn != null && mSQLServerCnn.State != System.Data.ConnectionState.Closed)
-                mSQLServerCnn.Close();
+            //if (mSQLServerCnn != null && mSQLServerCnn.State != System.Data.ConnectionState.Closed)
+            //    mSQLServerCnn.Close();
         }
 
         public bool Connect2MongoDB()
