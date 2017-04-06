@@ -18,9 +18,25 @@ namespace SQL2NonSQLConverter
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            bool restult = BmConnection.Connect2SQLServer(txtSQLServerName.Text,txtSQLServereUsername.Text, txtSQLServerPwd.Text);
-            MessageBox.Show(restult + "");
-            BmConnection.Connect2MongoDB();
+            //bool restult = BmConnection.Connect2SQLServer(txtSQLServerName.Text,txtSQLServereUsername.Text, txtSQLServerPwd.Text);
+            //MessageBox.Show(restult + "");
+            //BmConnection.Connect2MongoDB();
+            BmSQLControler sqlControler = new BmSQLControler(txtSQLServerName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
+            sqlControler.sqlInit();
+
+            foreach (BmSQLTableDataType table in sqlControler.SqlSchema.Tables)
+            {
+                TreeNode node = new TreeNode();
+                node.Text = table.StTableName;
+                foreach (BmSQLColumnDataType column in table.Columns)
+                {
+                    TreeNode subNode = new TreeNode();
+                    subNode.Text = column.ColName + " : " + column.DataTypeName;
+                    node.Nodes.Add(subNode);
+                }
+
+                tvSQLSchema.Nodes.Add(node);
+            }
         }
     }
 }

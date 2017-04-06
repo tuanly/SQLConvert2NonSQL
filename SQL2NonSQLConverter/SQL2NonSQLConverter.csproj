@@ -56,19 +56,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
-      <HintPath>C:\Users\Tuan Ly\Desktop\bm\CSharpDriver-2.4.3\net45\MongoDB.Bson.dll</HintPath>
+      <HintPath>.\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>C:\Users\Tuan Ly\Desktop\bm\CSharpDriver-2.4.3\net45\MongoDB.Driver.dll</HintPath>
+      <HintPath>.\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver.Core">
-      <HintPath>C:\Users\Tuan Ly\Desktop\bm\CSharpDriver-2.4.3\net45\MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.GridFS">
-      <HintPath>C:\Users\Tuan Ly\Desktop\bm\CSharpDriver-2.4.3\net45\MongoDB.Driver.GridFS.dll</HintPath>
+      <HintPath>.\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver.Legacy">
-      <HintPath>C:\Users\Tuan Ly\Desktop\bm\CSharpDriver-2.4.3\net45\MongoDB.Driver.Legacy.dll</HintPath>
+      <HintPath>.\MongoDB.Driver.Legacy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -79,6 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BmConnection.cs" />
+    <Compile Include="BmSQLColumnDataType.cs" />
+    <Compile Include="BmSQLControler.cs" />
+    <Compile Include="BmSQLDatabaseDataType.cs" />
+    <Compile Include="BmSQLDataType.cs" />
+    <Compile Include="BmSQLTableDataType.cs" />
     <Compile Include="frmSQL2NonSQLConverter.cs">
       <SubType>Form</SubType>
     </Compile>

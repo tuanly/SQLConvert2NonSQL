@@ -13,11 +13,13 @@ namespace SQL2NonSQLConverter
 {
     class BmConnection
     {
-        private static SqlConnection mSQLServerCnn;
+        private SqlConnection mSQLServerCnn;
         private const string SQLDBName = "bmdb";
-        private static IMongoClient mMongoClient = null;
+        private IMongoClient mMongoClient = null;
 
-        public static bool Connect2SQLServer(string stServer, string stUsername, string stPwd)
+        public SqlConnection sqlCNN { get => mSQLServerCnn; set => mSQLServerCnn = value; }
+
+        public bool Connect2SQLServer(string stServer, string stUsername, string stPwd)
         {
             bool result = true;
             try
@@ -38,13 +40,13 @@ namespace SQL2NonSQLConverter
             return result;
         }
 
-        public static void CloseSQLServerConnection()
+        public void CloseSQLServerConnection()
         {
             if (mSQLServerCnn != null && mSQLServerCnn.State != System.Data.ConnectionState.Closed)
                 mSQLServerCnn.Close();
         }
 
-        public static bool Connect2MongoDB()
+        public bool Connect2MongoDB()
         {
             string source = "mongodb://127.0.0.1:27017";
             mMongoClient = new MongoClient(source);
