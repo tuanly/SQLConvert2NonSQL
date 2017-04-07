@@ -8,21 +8,98 @@ namespace SQL2NonSQLConverter
 {
     class BmSQLColumnDataType
     {
-        private string m_stColName;
-        private int m_iColIndex;
-        private int m_iDataType;
-        private string m_stDataTypeName;
-        private int m_iNumericPrecision;
-        private int m_iNumericScale;
-        private bool m_bIsUnique;
-        private bool m_bIsKey;
-        private bool m_bAllowDBNull;
-        private bool m_bIsIdentity;
-        private bool m_bIsAutoIncrement;
-        private bool m_bIsReadOnly;
-        private bool m_bIsForeignKey;
-        private string m_stParentTableName;
+        private string m_stColName;        
+        private int m_iColIndex;        
+        private int m_iDataType;        
+        private string m_stDataTypeName;       
+        private int m_iNumericPrecision;       
+        private int m_iNumericScale;       
+        private bool m_bIsUnique;        
+        private bool m_bIsKey;        
+        private bool m_bIsIdentity;        
+        private bool m_bIsAutoIncrement;        
+        private bool m_bIsReadOnly;       
+        private bool m_bIsForeignKey;        
+        private string m_stParentTableName;        
         private string m_stReferenceColName;
+
+        public string ColName
+        {
+            get { return m_stColName; }
+            set { m_stColName = value; }
+        }
+        public int ColIndex
+        {
+            get { return m_iColIndex; }
+            set { m_iColIndex = value; }
+        }
+        public int DataType
+        {
+            get { return m_iDataType; }
+            set { m_iDataType = value; }
+        }
+        public string DataTypeName
+        {
+            get { return m_stDataTypeName; }
+            set { m_stDataTypeName = value; }
+        }
+        public int NumericPrecision
+        {
+            get { return m_iNumericPrecision; }
+            set { m_iNumericPrecision = value; }
+        }
+        public int NumericScale
+        {
+            get { return m_iNumericScale; }
+            set { m_iNumericScale = value; }
+        }
+        public bool IsUnique
+        {
+            get { return m_bIsUnique; }
+            set { m_bIsUnique = value; }
+        }
+        public bool IsKey
+        {
+            get { return m_bIsKey; }
+            set { m_bIsKey = value; }
+        }
+        private bool m_bAllowDBNull;
+
+        public bool IsAllowDBNull
+        {
+            get { return m_bAllowDBNull; }
+            set { m_bAllowDBNull = value; }
+        }
+        public bool IsIdentity
+        {
+            get { return m_bIsIdentity; }
+            set { m_bIsIdentity = value; }
+        }
+        public bool IsAutoIncrement
+        {
+            get { return m_bIsAutoIncrement; }
+            set { m_bIsAutoIncrement = value; }
+        }
+        public bool IsReadOnly
+        {
+            get { return m_bIsReadOnly; }
+            set { m_bIsReadOnly = value; }
+        }
+        public bool IsForeignKey
+        {
+            get { return m_bIsForeignKey; }
+            set { m_bIsForeignKey = value; }
+        }
+        public string ParentTableName
+        {
+            get { return m_stParentTableName; }
+            set { m_stParentTableName = value; }
+        }
+        public string ReferenceColName
+        {
+            get { return m_stReferenceColName; }
+            set { m_stReferenceColName = value; }
+        }
 
 
         public BmSQLColumnDataType()
@@ -46,43 +123,29 @@ namespace SQL2NonSQLConverter
 
         public void updateDataType(String stDataTypeName)
         {
-            m_stDataTypeName = stDataTypeName;
+            DataTypeName = stDataTypeName;
             if (stDataTypeName.Equals("decimal"))
             {
-                m_iDataType = BmSQLDataType.SQL_DATA_TYPE_NUMBER;
+                DataType = BmSQLDataType.SQL_DATA_TYPE_NUMBER;
             }
             else if (stDataTypeName.Equals("nvarchar"))
             {
-                m_iDataType = BmSQLDataType.SQL_DATA_TYPE_VARCHAR;
+                DataType = BmSQLDataType.SQL_DATA_TYPE_VARCHAR;
             }
             else if (stDataTypeName.Equals("bit"))
             {
-                m_iDataType = BmSQLDataType.SQL_DATA_TYPE_BIT;
+                DataType = BmSQLDataType.SQL_DATA_TYPE_BIT;
             }
             else if (stDataTypeName.Equals("date"))
             {
-                m_iDataType = BmSQLDataType.SQL_DATA_TYPE_DATE;
+                DataType = BmSQLDataType.SQL_DATA_TYPE_DATE;
             }
             else if (stDataTypeName.Equals("int"))
             {
-                m_iDataType = BmSQLDataType.SQL_DATA_TYPE_INT;
+                DataType = BmSQLDataType.SQL_DATA_TYPE_INT;
             }
         }
 
-        public string ColName { get => m_stColName; set => m_stColName = value; }
-        public int ColIndex { get => m_iColIndex; set => m_iColIndex = value; }
-        public int DataType { get => m_iDataType; set => m_iDataType = value; }
-        public int NumericPrecision { get => m_iNumericPrecision; set => m_iNumericPrecision = value; }
-        public int NumericScale { get => m_iNumericScale; set => m_iNumericScale = value; }
-        public bool IsUnique { get => m_bIsUnique; set => m_bIsUnique = value; }
-        public bool IsKey { get => m_bIsKey; set => m_bIsKey = value; }
-        public bool ISAllowDBNull { get => m_bAllowDBNull; set => m_bAllowDBNull = value; }
-        public bool IsIdentity { get => m_bIsIdentity; set => m_bIsIdentity = value; }
-        public bool IsAutoIncrement { get => m_bIsAutoIncrement; set => m_bIsAutoIncrement = value; }
-        public bool IsReadOnly { get => m_bIsReadOnly; set => m_bIsReadOnly = value; }
-        public string DataTypeName { get => m_stDataTypeName; set => m_stDataTypeName = value; }
-        public bool IsForeignKey { get => m_bIsForeignKey; set => m_bIsForeignKey = value; }
-        public string ParentTableName { get => m_stParentTableName; set => m_stParentTableName = value; }
-        public string ReferenceColName { get => m_stReferenceColName; set => m_stReferenceColName = value; }
+        
     }
 }

@@ -16,17 +16,20 @@ namespace SQL2NonSQLConverter
         private string m_stDBName;
         private string m_stUserName;
         private string m_stUserPW;
+       
         private BmConnection m_sqlCnn = null;
         private BmSQLDatabaseDataType m_sqlSchema = null;
 
+       
+
         public BmSQLControler()
         {
-            ServerName = "";
-            UserName = "";
-            UserPW = "";
+            m_stServerName = "";
+            m_stUserName = "";
+            m_stUserPW = "";
             m_stDBName = "";
             m_sqlCnn = new BmConnection();
-            SqlSchema = new BmSQLDatabaseDataType();
+            m_sqlSchema = new BmSQLDatabaseDataType();
         }
 
         public BmSQLControler(string stServerName, string stDbName, string stUserName, string stPassword)
@@ -36,15 +39,32 @@ namespace SQL2NonSQLConverter
             m_stUserPW = stPassword;
             m_stDBName = stDbName;
             m_sqlCnn = new BmConnection();
-            SqlSchema = new BmSQLDatabaseDataType();
+            m_sqlSchema = new BmSQLDatabaseDataType();
         }
         
-        public string ServerName { get => m_stServerName; set => m_stServerName = value; }
-        public string UserName { get => m_stUserName; set => m_stUserName = value; }
-        public string UserPW { get => m_stUserPW; set => m_stUserPW = value; }
-        internal BmSQLDatabaseDataType SqlSchema { get => m_sqlSchema; set => m_sqlSchema = value; }
-        public string DBName { get => m_stDBName; set => m_stDBName = value; }
+        public string DBName
+        {
+          get { return m_stDBName; }
+          set { m_stDBName = value; }
+        }
+        public string ServerName
+        {
+          get { return m_stServerName; }
+          set { m_stServerName = value; }
+        }
+        
 
+        public string UserPW
+        {
+          get { return m_stUserPW; }
+          set { m_stUserPW = value; }
+        }
+
+        internal BmSQLDatabaseDataType SqlSchema
+        {
+            get { return m_sqlSchema; }
+            set { m_sqlSchema = value; }
+        }
         ~BmSQLControler()
         {
             if (m_sqlCnn != null)

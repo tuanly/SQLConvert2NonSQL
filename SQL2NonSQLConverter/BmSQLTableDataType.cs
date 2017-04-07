@@ -12,15 +12,31 @@ namespace SQL2NonSQLConverter
         private string m_stDescription;
         private List<BmSQLColumnDataType> m_lsColumn;
 
+        public string TableName
+        {
+            get { return m_stTableName; }
+            set { m_stTableName = value; }
+        }
+       
+
+        public string Description
+        {
+            get { return m_stDescription; }
+            set { m_stDescription = value; }
+        }
+        
+        internal List<BmSQLColumnDataType> Columns
+        {
+            get { return m_lsColumn; }
+            set { m_lsColumn = value; }
+        }
+
         public BmSQLTableDataType()
         {
-            StDescription = "";
-            StTableName = "";
+            m_stDescription = "";
+            m_stTableName = "";
             m_lsColumn = new List<BmSQLColumnDataType>();
         }
 
-        public string StTableName { get => m_stTableName; set => m_stTableName = value; }
-        public string StDescription { get => m_stDescription; set => m_stDescription = value; }
-        internal List<BmSQLColumnDataType> Columns { get => m_lsColumn; set => m_lsColumn = value; }
     }
 }

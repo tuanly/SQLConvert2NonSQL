@@ -11,14 +11,19 @@ using System.Runtime;
 
 namespace SQL2NonSQLConverter
 {
-    class BmConnection
+    public class BmConnection
     {
         private SqlConnection mSQLServerCnn;
+
+
     
-        private IMongoClient mMongoClient = null;
-
-        public SqlConnection sqlCNN { get => mSQLServerCnn; set => mSQLServerCnn = value; }
-
+        private MongoClient mMongoClient = null;
+        public SqlConnection SQLServerCnn
+        {
+            get { return mSQLServerCnn; }
+            set { mSQLServerCnn = value; }
+        }
+        
         public bool Connect2SQLServer(string stServer, string stDbName, string stUsername, string stPwd)
         {
             bool result = true;
@@ -29,8 +34,8 @@ namespace SQL2NonSQLConverter
                                        "Trusted_Connection=yes;" +
                                        "database=" + stDbName + "; " +
                                        "connection timeout=30";
-                mSQLServerCnn = new SqlConnection(source);
-                mSQLServerCnn.Open();
+                SQLServerCnn = new SqlConnection(source);
+                SQLServerCnn.Open();
             }
             catch (Exception ex)
             {
@@ -50,10 +55,14 @@ namespace SQL2NonSQLConverter
         {
             string source = "mongodb://127.0.0.1:27017";
             mMongoClient = new MongoClient(source);
+            
             return true;
         }
 
+        public static SqlConnection getSQLConnection()
+        {
+            return SQLServerCnn;
+        }
 
-      
     }
 }
