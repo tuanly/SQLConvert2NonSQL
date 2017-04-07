@@ -31,6 +31,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDBName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtSQLServereUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
@@ -41,8 +43,7 @@
             this.tvSQLSchema = new System.Windows.Forms.TreeView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDBName = new System.Windows.Forms.TextBox();
+            this.btnConvert = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -117,6 +119,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SQL Server";
             // 
+            // txtDBName
+            // 
+            this.txtDBName.Location = new System.Drawing.Point(149, 61);
+            this.txtDBName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDBName.Name = "txtDBName";
+            this.txtDBName.Size = new System.Drawing.Size(295, 22);
+            this.txtDBName.TabIndex = 8;
+            this.txtDBName.Text = "bmdb";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 65);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Database name:";
+            // 
             // txtSQLServereUsername
             // 
             this.txtSQLServereUsername.Location = new System.Drawing.Point(131, 88);
@@ -138,7 +159,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(223, 142);
+            this.btnConnect.Location = new System.Drawing.Point(217, 147);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(100, 28);
@@ -212,6 +233,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnConvert);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
@@ -222,24 +244,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MongoDB";
             // 
-            // label4
+            // btnConvert
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 65);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 17);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Database name:";
-            // 
-            // txtDBName
-            // 
-            this.txtDBName.Location = new System.Drawing.Point(149, 61);
-            this.txtDBName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDBName.Name = "txtDBName";
-            this.txtDBName.Size = new System.Drawing.Size(295, 22);
-            this.txtDBName.TabIndex = 8;
-            this.txtDBName.Text = "bmdb";
+            this.btnConvert.Location = new System.Drawing.Point(191, 77);
+            this.btnConvert.Margin = new System.Windows.Forms.Padding(4);
+            this.btnConvert.Name = "btnConvert";
+            this.btnConvert.Size = new System.Drawing.Size(100, 28);
+            this.btnConvert.TabIndex = 5;
+            this.btnConvert.Text = "Convert";
+            this.btnConvert.UseVisualStyleBackColor = true;
+            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
             // 
             // frmSQL2NonSQLConverter
             // 
@@ -263,6 +277,7 @@
             this.splitContainer3.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -284,6 +299,7 @@
         private System.Windows.Forms.TreeView tvSQLSchema;
         private System.Windows.Forms.TextBox txtDBName;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnConvert;
     }
 }
 

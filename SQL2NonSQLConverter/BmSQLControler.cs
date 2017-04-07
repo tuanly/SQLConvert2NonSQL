@@ -98,8 +98,8 @@ namespace SQL2NonSQLConverter
                     {
                         Debug.WriteLine("{0} = {1}", col.ColumnName, row[col]);
                         sqlTable = new BmSQLTableDataType();
-                        sqlTable.StTableName = row[col].ToString();
-                        DataTable fields = m_sqlCnn.sqlCNN.GetSchema(SqlClientMetaDataCollectionNames.Columns, new string[] { null, null, sqlTable.StTableName });
+                        sqlTable.TableName = row[col].ToString();
+                        DataTable fields = m_sqlCnn.sqlCNN.GetSchema(SqlClientMetaDataCollectionNames.Columns, new string[] { null, null, sqlTable.TableName });
                         foreach (DataRow dr in fields.Rows)
                         {
                             BmSQLColumnDataType sqlColumn = new BmSQLColumnDataType();
@@ -107,7 +107,7 @@ namespace SQL2NonSQLConverter
                            
                             Debug.WriteLine(sqlColumn.ColName);
                             //get column type
-                            string sql = "SELECT + ["  + sqlColumn.ColName + "] FROM [" + sqlTable.StTableName+ "]";
+                            string sql = "SELECT + ["  + sqlColumn.ColName + "] FROM [" + sqlTable.TableName+ "]";
                             SqlCommand sqlCMD = new SqlCommand(sql, m_sqlCnn.sqlCNN);
                             SqlDataReader sqlReader = sqlCMD.ExecuteReader(CommandBehavior.KeyInfo);
                             DataTable schemaDataType = sqlReader.GetSchemaTable();
@@ -169,7 +169,7 @@ namespace SQL2NonSQLConverter
                                     "FROM sys.foreign_keys AS f " +
                                     "INNER JOIN sys.foreign_key_columns AS fc " +
                                      "  ON f.object_id = fc.constraint_object_id " +
-                                    "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.StTableName + "') AND COL_NAME(fc.parent_object_id, fc.parent_column_id) = '"+ sqlColumn.ColName+ "'; ";
+                                    "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.TableName + "') AND COL_NAME(fc.parent_object_id, fc.parent_column_id) = '"+ sqlColumn.ColName+ "'; ";
                             SqlCommand sqlCMD2 = new SqlCommand(sql2, m_sqlCnn.sqlCNN);
                             SqlDataReader sqlReader2 = sqlCMD2.ExecuteReader();
                             while (sqlReader2.Read())

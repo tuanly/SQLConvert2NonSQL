@@ -21,6 +21,7 @@ namespace SQL2NonSQLConverter
             //bool restult = BmConnection.Connect2SQLServer(txtSQLServerName.Text,txtSQLServereUsername.Text, txtSQLServerPwd.Text);
             //MessageBox.Show(restult + "");
             //BmConnection.Connect2MongoDB();
+            tvSQLSchema.Nodes.Clear();
             BmSQLControler sqlControler = new BmSQLControler(txtSQLServerName.Text, txtDBName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
             sqlControler.sqlInit();
 
@@ -41,6 +42,12 @@ namespace SQL2NonSQLConverter
 
                 tvSQLSchema.Nodes.Add(node);
             }
+        }
+
+        private void btnConvert_Click(object sender, EventArgs e)
+        {
+            BmConnection cnn = new BmConnection();
+            cnn.Connect2MongoDB();
         }
     }
 }
