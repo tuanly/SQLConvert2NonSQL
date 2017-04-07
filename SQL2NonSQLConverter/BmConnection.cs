@@ -64,10 +64,29 @@ namespace SQL2NonSQLConverter
             mMongoClient = new MongoClient();
             mMongoServer = mMongoClient.GetServer();
             mMongoDB = mMongoServer.GetDatabase("MyDatabase");
+            var collection = mMongoDB.GetCollection<BookStore>("BookStore");
+            BookStore bookStore = new BookStore
+            {
+                BookTitle = "MongoDB Basics",
+                ISBN = "8767687689898yu",
+                Auther = "Tanya",
+                Category = "NoSQL DBMS"
+            };
+
+            collection.Save(bookStore);
             return true;
         }
 
 
       
+    }
+
+    class BookStore
+    {
+        public ObjectId Id { get; set; }
+        public string BookTitle { get; set; }
+        public string Auther { get; set; }
+        public string Category { get; set; }
+        public string ISBN { get; set; }
     }
 }
