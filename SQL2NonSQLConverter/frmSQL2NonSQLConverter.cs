@@ -32,6 +32,10 @@ namespace SQL2NonSQLConverter
                 {
                     TreeNode subNode = new TreeNode();
                     subNode.Text = column.ColName + " : " + column.DataTypeName;
+                    if (column.IsKey)
+                        subNode.Text += " - Primary Key";
+                    else if (column.IsForeignKey)
+                        subNode.Text += " - Foreign Key : (" + column.ParentTableName + "-" + column.ReferenceColName + ")" ;
                     node.Nodes.Add(subNode);
                 }
 

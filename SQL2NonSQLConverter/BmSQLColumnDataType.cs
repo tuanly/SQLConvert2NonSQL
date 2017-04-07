@@ -20,6 +20,10 @@ namespace SQL2NonSQLConverter
         private bool m_bIsIdentity;
         private bool m_bIsAutoIncrement;
         private bool m_bIsReadOnly;
+        private bool m_bIsForeignKey;
+        private string m_stParentTableName;
+        private string m_stReferenceColName;
+
 
         public BmSQLColumnDataType()
         {
@@ -35,6 +39,9 @@ namespace SQL2NonSQLConverter
             m_bIsIdentity = false;
             m_bIsAutoIncrement = false;
             m_bIsReadOnly = false;
+            m_bIsForeignKey = false;
+            m_stParentTableName = "";
+            m_stReferenceColName = "";
         }
 
         public void updateDataType(String stDataTypeName)
@@ -74,5 +81,8 @@ namespace SQL2NonSQLConverter
         public bool IsAutoIncrement { get => m_bIsAutoIncrement; set => m_bIsAutoIncrement = value; }
         public bool IsReadOnly { get => m_bIsReadOnly; set => m_bIsReadOnly = value; }
         public string DataTypeName { get => m_stDataTypeName; set => m_stDataTypeName = value; }
+        public bool IsForeignKey { get => m_bIsForeignKey; set => m_bIsForeignKey = value; }
+        public string ParentTableName { get => m_stParentTableName; set => m_stParentTableName = value; }
+        public string ReferenceColName { get => m_stReferenceColName; set => m_stReferenceColName = value; }
     }
 }
