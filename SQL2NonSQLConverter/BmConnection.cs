@@ -59,10 +59,6 @@ namespace SQL2NonSQLConverter
             return true;
         }
 
-        public static SqlConnection getSQLConnection()
-        {
-            return SQLServerCnn;
-        }
-
+      
     }
 }

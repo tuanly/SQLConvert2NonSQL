@@ -27,7 +27,7 @@ namespace SQL2NonSQLConverter
             foreach (BmSQLTableDataType table in sqlControler.SqlSchema.Tables)
             {
                 TreeNode node = new TreeNode();
-                node.Text = table.StTableName;
+                node.Text = table.TableName;
                 foreach (BmSQLColumnDataType column in table.Columns)
                 {
                     TreeNode subNode = new TreeNode();
