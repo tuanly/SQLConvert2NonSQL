@@ -21,7 +21,7 @@ namespace SQL2NonSQLConverter
             //bool restult = BmConnection.Connect2SQLServer(txtSQLServerName.Text,txtSQLServereUsername.Text, txtSQLServerPwd.Text);
             //MessageBox.Show(restult + "");
             //BmConnection.Connect2MongoDB();
-            BmSQLControler sqlControler = new BmSQLControler(txtSQLServerName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
+            BmSQLControler sqlControler = new BmSQLControler(txtSQLServerName.Text, txtDBName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
             sqlControler.sqlInit();
 
             foreach (BmSQLTableDataType table in sqlControler.SqlSchema.Tables)

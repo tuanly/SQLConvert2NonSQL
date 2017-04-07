@@ -14,12 +14,12 @@ namespace SQL2NonSQLConverter
     class BmConnection
     {
         private SqlConnection mSQLServerCnn;
-        private const string SQLDBName = "bmdb";
+    
         private IMongoClient mMongoClient = null;
 
         public SqlConnection sqlCNN { get => mSQLServerCnn; set => mSQLServerCnn = value; }
 
-        public bool Connect2SQLServer(string stServer, string stUsername, string stPwd)
+        public bool Connect2SQLServer(string stServer, string stDbName, string stUsername, string stPwd)
         {
             bool result = true;
             try
@@ -27,7 +27,7 @@ namespace SQL2NonSQLConverter
                 string source = @"user id=" + stUsername + ";" +
                                        "password=" + stPwd + ";server=" + stServer + ";" +
                                        "Trusted_Connection=yes;" +
-                                       "database=" + SQLDBName + "; " +
+                                       "database=" + stDbName + "; " +
                                        "connection timeout=30";
                 mSQLServerCnn = new SqlConnection(source);
                 mSQLServerCnn.Open();

@@ -13,6 +13,7 @@ namespace SQL2NonSQLConverter
     class BmSQLControler
     {
         private string m_stServerName;
+        private string m_stDBName;
         private string m_stUserName;
         private string m_stUserPW;
         private BmConnection m_sqlCnn = null;
@@ -20,26 +21,29 @@ namespace SQL2NonSQLConverter
 
         public BmSQLControler()
         {
-            StServerName = "";
-            StUserName = "";
-            StUserPW = "";
+            ServerName = "";
+            UserName = "";
+            UserPW = "";
+            m_stDBName = "";
             m_sqlCnn = new BmConnection();
             SqlSchema = new BmSQLDatabaseDataType();
         }
 
-        public BmSQLControler(string stServerName, string stUserName, string stPassword)
+        public BmSQLControler(string stServerName, string stDbName, string stUserName, string stPassword)
         {
             m_stServerName = stServerName;
             m_stUserName = stUserName;
             m_stUserPW = stPassword;
+            m_stDBName = stDbName;
             m_sqlCnn = new BmConnection();
             SqlSchema = new BmSQLDatabaseDataType();
         }
         
-        public string StServerName { get => m_stServerName; set => m_stServerName = value; }
-        public string StUserName { get => m_stUserName; set => m_stUserName = value; }
-        public string StUserPW { get => m_stUserPW; set => m_stUserPW = value; }
+        public string ServerName { get => m_stServerName; set => m_stServerName = value; }
+        public string UserName { get => m_stUserName; set => m_stUserName = value; }
+        public string UserPW { get => m_stUserPW; set => m_stUserPW = value; }
         internal BmSQLDatabaseDataType SqlSchema { get => m_sqlSchema; set => m_sqlSchema = value; }
+        public string DBName { get => m_stDBName; set => m_stDBName = value; }
 
         ~BmSQLControler()
         {
@@ -50,7 +54,7 @@ namespace SQL2NonSQLConverter
 
         public void sqlInit()
         {
-            m_sqlCnn.Connect2SQLServer(m_stServerName, m_stUserName, m_stUserPW);
+            m_sqlCnn.Connect2SQLServer(m_stServerName, m_stDBName, m_stUserName, m_stUserPW);
             getSQLSchema();
         }
 

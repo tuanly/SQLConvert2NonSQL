@@ -41,6 +41,8 @@
             this.tvSQLSchema = new System.Windows.Forms.TreeView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDBName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -96,6 +98,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDBName);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtSQLServereUsername);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnConnect);
@@ -115,7 +119,7 @@
             // 
             // txtSQLServereUsername
             // 
-            this.txtSQLServereUsername.Location = new System.Drawing.Point(131, 73);
+            this.txtSQLServereUsername.Location = new System.Drawing.Point(131, 88);
             this.txtSQLServereUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtSQLServereUsername.Name = "txtSQLServereUsername";
             this.txtSQLServereUsername.Size = new System.Drawing.Size(313, 22);
@@ -125,7 +129,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 78);
+            this.label3.Location = new System.Drawing.Point(36, 93);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 17);
@@ -145,7 +149,7 @@
             // 
             // txtSQLServerPwd
             // 
-            this.txtSQLServerPwd.Location = new System.Drawing.Point(131, 110);
+            this.txtSQLServerPwd.Location = new System.Drawing.Point(131, 117);
             this.txtSQLServerPwd.Margin = new System.Windows.Forms.Padding(4);
             this.txtSQLServerPwd.Name = "txtSQLServerPwd";
             this.txtSQLServerPwd.PasswordChar = '*';
@@ -156,7 +160,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 114);
+            this.label2.Location = new System.Drawing.Point(36, 121);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 17);
@@ -218,6 +222,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MongoDB";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(39, 65);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Database name:";
+            // 
+            // txtDBName
+            // 
+            this.txtDBName.Location = new System.Drawing.Point(149, 61);
+            this.txtDBName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDBName.Name = "txtDBName";
+            this.txtDBName.Size = new System.Drawing.Size(295, 22);
+            this.txtDBName.TabIndex = 8;
+            this.txtDBName.Text = "bmdb";
+            // 
             // frmSQL2NonSQLConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -259,6 +282,8 @@
         private System.Windows.Forms.TextBox txtSQLServereUsername;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TreeView tvSQLSchema;
+        private System.Windows.Forms.TextBox txtDBName;
+        private System.Windows.Forms.Label label4;
     }
 }
 
