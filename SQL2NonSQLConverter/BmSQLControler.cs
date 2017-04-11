@@ -169,7 +169,7 @@ namespace SQL2NonSQLConverter
                                     "FROM sys.foreign_keys AS f " +
                                     "INNER JOIN sys.foreign_key_columns AS fc " +
                                      "  ON f.object_id = fc.constraint_object_id " +
-                                    "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.TableName + "') AND COL_NAME(fc.parent_object_id, fc.parent_column_id) = '"+ sqlColumn.ColName+ "'; ";
+                                    "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.TableName + "') AND COL_NAME(fc.referenced_object_id, fc.referenced_column_id) = '" + sqlColumn.ColName+ "'; ";
                             SqlCommand sqlCMD2 = new SqlCommand(sql2, m_sqlCnn.sqlCNN);
                             SqlDataReader sqlReader2 = sqlCMD2.ExecuteReader();
                             while (sqlReader2.Read())
