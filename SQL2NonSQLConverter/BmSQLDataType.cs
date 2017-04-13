@@ -16,11 +16,12 @@ namespace SQL2NonSQLConverter
         public const int SQL_DATA_TYPE_FLOAT     = 5;
         public const int SQL_DATA_TYPE_NUMBER    = 6;
         public const int SQL_DATA_TYPE_DATE      = 7;
-        public const int SQL_DATA_TYPE_DATETIMEP = 8;
+        public const int SQL_DATA_TYPE_DATETIME  = 8;
         public const int SQL_DATA_TYPE_TIME      = 9;
         public const int SQL_DATA_TYPE_NCHAR     = 10;
         public const int SQL_DATA_TYPE_BIT       = 11;
         public const int SQL_DATA_TYPE_IMAGE     = 12;
+        public const int SQL_DATA_TYPE_ARRAY     = 13;
 
     }
 }

@@ -12,6 +12,7 @@ namespace SQL2NonSQLConverter
         private string m_stDescription;
         private List<BmSQLColumnDataType> m_lsColumn;
         private List<BmSQLDataRow> m_lsData;
+        private bool m_bIsRemove;
 
         public string TableName
         {
@@ -19,6 +20,11 @@ namespace SQL2NonSQLConverter
             set { m_stTableName = value; }
         }
        
+        public bool IsRemove
+        {
+            get { return m_bIsRemove; }
+            set { m_bIsRemove = value; }
+        }
 
         public string Description
         {
@@ -41,6 +47,7 @@ namespace SQL2NonSQLConverter
         {
             m_stDescription = "";
             m_stTableName = "";
+            m_bIsRemove = false;
             m_lsColumn = new List<BmSQLColumnDataType>();
             m_lsData = new List<BmSQLDataRow>();
         }

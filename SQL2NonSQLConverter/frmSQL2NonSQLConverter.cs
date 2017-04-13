@@ -52,7 +52,7 @@ namespace SQL2NonSQLConverter
                 
                 m_nonSQLControler = new BmNonSQLControler(txtMongoServerIP.Text, txtMongoDBPort.Text, txtDBName.Text);
                 m_nonSQLControler.nonSQLInit();
-                m_nonSQLControler.convertSQL2NonSQL(m_sqlControler.SqlSchema.Tables, tvNonSQLSchema);
+                m_nonSQLControler.convertSQL2NonSQLVer2(m_sqlControler.SqlSchema.Tables, tvNonSQLSchema);
 
             }
             

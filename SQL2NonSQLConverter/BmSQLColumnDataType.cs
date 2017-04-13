@@ -23,6 +23,28 @@ namespace SQL2NonSQLConverter
         private string m_stParentTableName;        
         private string m_stReferenceColName;
 
+       
+        
+        private string m_stIncludeTableName;
+        private string m_stIncludeForeignKeyName;
+        private bool m_bIsIncludeTable;
+
+        public bool IsIncludeTable
+        {
+            get { return m_bIsIncludeTable; }
+            set { m_bIsIncludeTable = value; }
+        }
+       
+        public string IncludeTableName
+        {
+            get { return m_stIncludeTableName; }
+            set { m_stIncludeTableName = value; }
+        }
+        public string IncludeForeignKeyName
+        {
+            get { return m_stIncludeForeignKeyName; }
+            set { m_stIncludeForeignKeyName = value; }
+        }
         public string ColName
         {
             get { return m_stColName; }
@@ -119,6 +141,10 @@ namespace SQL2NonSQLConverter
             m_bIsForeignKey = false;
             m_stParentTableName = "";
             m_stReferenceColName = "";
+            m_stIncludeForeignKeyName = "";
+            m_stIncludeTableName = "";
+           
+            m_bIsIncludeTable = false;
         }
 
         public void updateDataType(String stDataTypeName)
@@ -139,6 +165,10 @@ namespace SQL2NonSQLConverter
             else if (stDataTypeName.Equals("date"))
             {
                 DataType = BmSQLDataType.SQL_DATA_TYPE_DATE;
+            }
+            else if (stDataTypeName.Equals("datetime"))
+            {
+                DataType = BmSQLDataType.SQL_DATA_TYPE_DATETIME;
             }
             else if (stDataTypeName.Equals("int"))
             {
@@ -162,6 +192,10 @@ namespace SQL2NonSQLConverter
                 type = typeof(bool);
             }
             else if (DataTypeName.Equals("date"))
+            {
+                type = typeof(DateTime);
+            }
+            else if (DataTypeName.Equals("datetime"))
             {
                 type = typeof(DateTime);
             }
