@@ -57,5 +57,17 @@ namespace SQL2NonSQLConverter
             }
             
         }
+
+        private void cmnSQL_Click(object sender, EventArgs e)
+        {          
+            frmDataViewer frmData = new frmDataViewer();
+            frmData.ShowSQLViewer(m_sqlControler.SqlSchema.Tables, tvSQLSchema.SelectedNode.Text);
+        }
+
+        private void cmnNonSQL_Click(object sender, EventArgs e)
+        {
+            frmDataViewer frmData = new frmDataViewer();
+            frmData.ShowNonSQLViewer(m_nonSQLControler.TreeData, tvNonSQLSchema.SelectedNode.Text);
+        }
     }
 }

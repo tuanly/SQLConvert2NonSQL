@@ -88,6 +88,12 @@
     <Compile Include="BmSQLDataRow.cs" />
     <Compile Include="BmSQLDataType.cs" />
     <Compile Include="BmSQLTableDataType.cs" />
+    <Compile Include="frmDataViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataViewer.Designer.cs">
+      <DependentUpon>frmDataViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSQL2NonSQLConverter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmDataViewer.resx">
+      <DependentUpon>frmDataViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSQL2NonSQLConverter.resx">
       <DependentUpon>frmSQL2NonSQLConverter.cs</DependentUpon>
     </EmbeddedResource>

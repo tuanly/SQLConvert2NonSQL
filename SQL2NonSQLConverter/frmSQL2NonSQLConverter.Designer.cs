@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,6 +50,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnConvert = new System.Windows.Forms.Button();
             this.tvNonSQLSchema = new System.Windows.Forms.TreeView();
+            this.cmnSQL = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.submnViewSQLData = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmnNonSQL = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.submnNonSQL = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,6 +68,8 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.cmnSQL.SuspendLayout();
+            this.cmnNonSQL.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -215,6 +222,7 @@
             // 
             // tvSQLSchema
             // 
+            this.tvSQLSchema.ContextMenuStrip = this.cmnSQL;
             this.tvSQLSchema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSQLSchema.Location = new System.Drawing.Point(0, 0);
             this.tvSQLSchema.Name = "tvSQLSchema";
@@ -309,11 +317,42 @@
             // 
             // tvNonSQLSchema
             // 
+            this.tvNonSQLSchema.ContextMenuStrip = this.cmnNonSQL;
             this.tvNonSQLSchema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvNonSQLSchema.Location = new System.Drawing.Point(0, 0);
             this.tvNonSQLSchema.Name = "tvNonSQLSchema";
             this.tvNonSQLSchema.Size = new System.Drawing.Size(482, 374);
             this.tvNonSQLSchema.TabIndex = 1;
+            // 
+            // cmnSQL
+            // 
+            this.cmnSQL.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmnSQL.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.submnViewSQLData});
+            this.cmnSQL.Name = "cmnSQL";
+            this.cmnSQL.Size = new System.Drawing.Size(153, 30);
+            this.cmnSQL.Click += new System.EventHandler(this.cmnSQL_Click);
+            // 
+            // submnViewSQLData
+            // 
+            this.submnViewSQLData.Name = "submnViewSQLData";
+            this.submnViewSQLData.Size = new System.Drawing.Size(152, 26);
+            this.submnViewSQLData.Text = "View Data";
+            // 
+            // cmnNonSQL
+            // 
+            this.cmnNonSQL.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmnNonSQL.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.submnNonSQL});
+            this.cmnNonSQL.Name = "cmnNonSQL";
+            this.cmnNonSQL.Size = new System.Drawing.Size(153, 30);
+            this.cmnNonSQL.Click += new System.EventHandler(this.cmnNonSQL_Click);
+            // 
+            // submnNonSQL
+            // 
+            this.submnNonSQL.Name = "submnNonSQL";
+            this.submnNonSQL.Size = new System.Drawing.Size(181, 26);
+            this.submnNonSQL.Text = "View Data";
             // 
             // frmSQL2NonSQLConverter
             // 
@@ -340,6 +379,8 @@
             this.splitContainer3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.cmnSQL.ResumeLayout(false);
+            this.cmnNonSQL.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -367,6 +408,10 @@
         private System.Windows.Forms.TextBox txtMongoDBPort;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TreeView tvNonSQLSchema;
+        private System.Windows.Forms.ContextMenuStrip cmnSQL;
+        private System.Windows.Forms.ToolStripMenuItem submnViewSQLData;
+        private System.Windows.Forms.ContextMenuStrip cmnNonSQL;
+        private System.Windows.Forms.ToolStripMenuItem submnNonSQL;
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SQL2NonSQLConverter
 {
-    class BmSQLTableDataType
+    public class BmSQLTableDataType
     {
         private string m_stTableName;
         private string m_stDescription;
