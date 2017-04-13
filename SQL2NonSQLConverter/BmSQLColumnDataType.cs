@@ -146,6 +146,32 @@ namespace SQL2NonSQLConverter
             }
         }
 
-        
+        public Type getType()
+        {
+            Type type = typeof(string);
+            if (DataTypeName.Equals("decimal"))
+            {
+                type = typeof(double);
+            }
+            else if (DataTypeName.Equals("nvarchar"))
+            {
+                type = typeof(string);
+            }
+            else if (DataTypeName.Equals("bit"))
+            {
+                type = typeof(bool);
+            }
+            else if (DataTypeName.Equals("date"))
+            {
+                type = typeof(DateTime);
+            }
+            else if (DataTypeName.Equals("int"))
+            {
+                type = typeof(int);
+            }
+            return type;
+        }
+      
+
     }
 }

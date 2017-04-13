@@ -79,10 +79,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BmClassBuilder.cs" />
     <Compile Include="BmConnection.cs" />
+    <Compile Include="BmNonSQLControler.cs" />
     <Compile Include="BmSQLColumnDataType.cs" />
     <Compile Include="BmSQLControler.cs" />
     <Compile Include="BmSQLDatabaseDataType.cs" />
+    <Compile Include="BmSQLDataRow.cs" />
     <Compile Include="BmSQLDataType.cs" />
     <Compile Include="BmSQLTableDataType.cs" />
     <Compile Include="frmSQL2NonSQLConverter.cs">

@@ -20,7 +20,7 @@ namespace SQL2NonSQLConverter
         private BmConnection m_sqlCnn = null;
         private BmSQLDatabaseDataType m_sqlSchema = null;
 
-       
+        
 
         public BmSQLControler()
         {
@@ -82,11 +82,53 @@ namespace SQL2NonSQLConverter
         {
             SqlSchema = new BmSQLDatabaseDataType();
             DataTable tables = m_sqlCnn.sqlCNN.GetSchema("Tables");
-            DisplayData(tables);
+            getSchema(tables);            
             return SqlSchema;
         }
 
-        private void DisplayData(System.Data.DataTable table)
+        private List<BmSQLDataRow> getData(BmSQLTableDataType table)
+        {
+            List<BmSQLDataRow> lsData = new List<BmSQLDataRow>();
+            SqlDataReader sqlReader = null;
+            try
+            {
+                string sql = "SELECT ";
+                for(int i = 0; i < table.Columns.Count; i++)
+                {
+                    sql += " " + table.Columns[i].ColName +  " ";
+                    if (i < table.Columns.Count - 1) sql += " , ";
+                    
+                }
+
+                sql += " FROM[" + table.TableName + "]";
+                SqlCommand sqlCMD = new SqlCommand(sql, m_sqlCnn.sqlCNN);
+                sqlReader = sqlCMD.ExecuteReader(CommandBehavior.Default);                
+                while (sqlReader.Read())
+                {
+                    BmSQLDataRow row = new BmSQLDataRow();
+                    for (int i = 0; i < sqlReader.FieldCount; i++)
+                    {
+                        row.ColValues.Add(sqlReader.GetValue(i).ToString());
+                        row.ColTypes.Add(sqlReader.GetFieldType(i));
+                        row.ColNames.Add(table.Columns[i].ColName);
+                    }
+                    lsData.Add(row);
+                }
+               
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                if (sqlReader != null && !sqlReader.IsClosed)
+                    sqlReader.Close();
+            }
+            
+            return lsData;
+        }
+        private void getSchema(System.Data.DataTable table)
         {
             foreach (System.Data.DataRow row in table.Rows)
             {
@@ -104,7 +146,7 @@ namespace SQL2NonSQLConverter
                         {
                             BmSQLColumnDataType sqlColumn = new BmSQLColumnDataType();
                             sqlColumn.ColName = dr["COLUMN_NAME"].ToString();
-                           
+                           // sqlColumn.updateDataType(dr[7].ToString());
                             Debug.WriteLine(sqlColumn.ColName);
                             //get column type
                             string sql = "SELECT + ["  + sqlColumn.ColName + "] FROM [" + sqlTable.TableName+ "]";
@@ -128,7 +170,8 @@ namespace SQL2NonSQLConverter
                                     {
                                         sqlColumn.updateDataType(type[property].ToString());
                                     }
-                                    else if (property.ColumnName.Equals("NumericPrecision"))
+                                    else
+                                    if (property.ColumnName.Equals("NumericPrecision"))
                                     {
                                         sqlColumn.NumericPrecision = Int16.Parse(type[property].ToString());
                                     }
@@ -195,7 +238,10 @@ namespace SQL2NonSQLConverter
                     
                 }
                 if (sqlTable != null)
+                {
+                    sqlTable.Data = getData(sqlTable);
                     SqlSchema.Tables.Add(sqlTable);
+                }
                 Debug.WriteLine("============================");
             }
         }

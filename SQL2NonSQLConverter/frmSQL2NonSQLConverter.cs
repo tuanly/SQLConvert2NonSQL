@@ -15,17 +15,18 @@ namespace SQL2NonSQLConverter
         {
             InitializeComponent();
         }
-
+        BmSQLControler m_sqlControler = null;
+        BmNonSQLControler m_nonSQLControler = null;
         private void btnConnect_Click(object sender, EventArgs e)
         {
             //bool restult = BmConnection.Connect2SQLServer(txtSQLServerName.Text,txtSQLServereUsername.Text, txtSQLServerPwd.Text);
             //MessageBox.Show(restult + "");
             //BmConnection.Connect2MongoDB();
             tvSQLSchema.Nodes.Clear();
-            BmSQLControler sqlControler = new BmSQLControler(txtSQLServerName.Text, txtDBName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
-            sqlControler.sqlInit();
+            m_sqlControler = new BmSQLControler(txtSQLServerName.Text, txtDBName.Text, txtSQLServereUsername.Text, txtSQLServerPwd.Text);
+            m_sqlControler.sqlInit();
 
-            foreach (BmSQLTableDataType table in sqlControler.SqlSchema.Tables)
+            foreach (BmSQLTableDataType table in m_sqlControler.SqlSchema.Tables)
             {
                 TreeNode node = new TreeNode();
                 node.Text = table.TableName;
@@ -46,8 +47,15 @@ namespace SQL2NonSQLConverter
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            BmConnection cnn = new BmConnection();
-            cnn.Connect2MongoDB();
+            if (m_sqlControler != null)
+            {
+                
+                m_nonSQLControler = new BmNonSQLControler(txtMongoServerIP.Text, txtMongoDBPort.Text, txtDBName.Text);
+                m_nonSQLControler.nonSQLInit();
+                m_nonSQLControler.convertSQL2NonSQL(m_sqlControler.SqlSchema.Tables, tvNonSQLSchema);
+
+            }
+            
         }
     }
 }

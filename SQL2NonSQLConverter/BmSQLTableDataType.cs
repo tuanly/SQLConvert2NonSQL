@@ -11,6 +11,7 @@ namespace SQL2NonSQLConverter
         private string m_stTableName;
         private string m_stDescription;
         private List<BmSQLColumnDataType> m_lsColumn;
+        private List<BmSQLDataRow> m_lsData;
 
         public string TableName
         {
@@ -30,12 +31,18 @@ namespace SQL2NonSQLConverter
             get { return m_lsColumn; }
             set { m_lsColumn = value; }
         }
+        internal List<BmSQLDataRow> Data
+        {
+            get { return m_lsData; }
+            set { m_lsData = value; }
+        }
 
         public BmSQLTableDataType()
         {
             m_stDescription = "";
             m_stTableName = "";
             m_lsColumn = new List<BmSQLColumnDataType>();
+            m_lsData = new List<BmSQLDataRow>();
         }
 
     }

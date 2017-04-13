@@ -43,7 +43,12 @@
             this.tvSQLSchema = new System.Windows.Forms.TreeView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtMongoDBPort = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtMongoServerIP = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnConvert = new System.Windows.Forms.Button();
+            this.tvNonSQLSchema = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,6 +60,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -226,6 +232,10 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.tvNonSQLSchema);
             this.splitContainer3.Size = new System.Drawing.Size(482, 562);
             this.splitContainer3.SplitterDistance = 183;
             this.splitContainer3.SplitterWidth = 5;
@@ -233,6 +243,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtMongoDBPort);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.txtMongoServerIP);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.btnConvert);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -244,9 +258,47 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MongoDB";
             // 
+            // txtMongoDBPort
+            // 
+            this.txtMongoDBPort.Location = new System.Drawing.Point(118, 63);
+            this.txtMongoDBPort.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMongoDBPort.Name = "txtMongoDBPort";
+            this.txtMongoDBPort.Size = new System.Drawing.Size(313, 22);
+            this.txtMongoDBPort.TabIndex = 9;
+            this.txtMongoDBPort.Text = "27017";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 66);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(34, 17);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Port";
+            // 
+            // txtMongoServerIP
+            // 
+            this.txtMongoServerIP.Location = new System.Drawing.Point(118, 31);
+            this.txtMongoServerIP.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMongoServerIP.Name = "txtMongoServerIP";
+            this.txtMongoServerIP.Size = new System.Drawing.Size(313, 22);
+            this.txtMongoServerIP.TabIndex = 7;
+            this.txtMongoServerIP.Text = "127.0.0.1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 34);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 17);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "IP Address:";
+            // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(191, 77);
+            this.btnConvert.Location = new System.Drawing.Point(163, 115);
             this.btnConvert.Margin = new System.Windows.Forms.Padding(4);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(100, 28);
@@ -254,6 +306,14 @@
             this.btnConvert.Text = "Convert";
             this.btnConvert.UseVisualStyleBackColor = true;
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
+            // 
+            // tvNonSQLSchema
+            // 
+            this.tvNonSQLSchema.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvNonSQLSchema.Location = new System.Drawing.Point(0, 0);
+            this.tvNonSQLSchema.Name = "tvNonSQLSchema";
+            this.tvNonSQLSchema.Size = new System.Drawing.Size(482, 374);
+            this.tvNonSQLSchema.TabIndex = 1;
             // 
             // frmSQL2NonSQLConverter
             // 
@@ -275,9 +335,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -300,6 +362,11 @@
         private System.Windows.Forms.TextBox txtDBName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.TextBox txtMongoServerIP;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtMongoDBPort;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TreeView tvNonSQLSchema;
     }
 }
 

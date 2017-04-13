@@ -6,8 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 
 using System.Runtime;
-
-
+using System.Reflection;
 
 namespace SQL2NonSQLConverter
 {
@@ -29,6 +28,17 @@ namespace SQL2NonSQLConverter
             set 
             {
                  mSQLServerCnn = value; 
+            }
+        }
+        public MongoDatabase nonSQLCNN
+        {
+            get
+            {
+                return mMongoDB;
+            }
+            set
+            {
+                mMongoDB = value;
             }
         }
         public bool Connect2SQLServer(string stServer, string stDbName, string stUsername, string stPwd)
@@ -58,35 +68,43 @@ namespace SQL2NonSQLConverter
             //    mSQLServerCnn.Close();
         }
 
-        public bool Connect2MongoDB()
+        public bool Connect2MongoDB(string ip, string port, string dbName)
         {
-            string source = "mongodb://127.0.0.1:27017";
-            mMongoClient = new MongoClient();
-            mMongoServer = mMongoClient.GetServer();
-            mMongoDB = mMongoServer.GetDatabase("MyDatabase");
-            var collection = mMongoDB.GetCollection<BookStore>("BookStore");
-            BookStore bookStore = new BookStore
-            {
-                BookTitle = "MongoDB Basics",
-                ISBN = "8767687689898yu",
-                Auther = "Tanya",
-                Category = "NoSQL DBMS"
-            };
+            string source = "mongodb://" + ip + ":" + " :" + port;
+           
 
-            collection.Save(bookStore);
+            try
+            {
+                mMongoClient = new MongoClient();
+                mMongoServer = mMongoClient.GetServer();
+                mMongoDB = mMongoServer.GetDatabase(dbName);
+                mMongoDB.Drop();
+               // mMongoDB.CreateCollection(dbName);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            //BmClassBuilder MCB = new BmClassBuilder("BookStore");
+            //var myclass = MCB.CreateObject(new string[5] { "Id", "BookTitle", "Auther", "Category", "ISBN" }, new Type[5] { typeof(ObjectId), typeof(string), typeof(string), typeof(string), typeof(string) });
+            //var myObject = Activator.CreateInstance(myclass.GetType());
+
+            //myclass.GetType().GetProperty("BookTitle", BindingFlags.Public | BindingFlags.Instance).SetValue(myObject, "dddMongoDB Basics", null);
+            //myclass.GetType().GetProperty("ISBN", BindingFlags.Public | BindingFlags.Instance).SetValue(myObject, "8767687689898yu", null);
+            //myclass.GetType().GetProperty("Auther", BindingFlags.Public | BindingFlags.Instance).SetValue(myObject, "Tanya", null);
+            //myclass.GetType().GetProperty("Category", BindingFlags.Public | BindingFlags.Instance).SetValue(myObject, "NoSQL DBMS", null);
+            //var collection = mMongoDB.GetCollection("BookStore");
+
+
+            //    collection.Save(myObject);
+
+      
+            
             return true;
         }
 
 
       
     }
-
-    class BookStore
-    {
-        public ObjectId Id { get; set; }
-        public string BookTitle { get; set; }
-        public string Auther { get; set; }
-        public string Category { get; set; }
-        public string ISBN { get; set; }
-    }
+    
 }
