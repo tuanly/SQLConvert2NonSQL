@@ -142,96 +142,102 @@ namespace SQL2NonSQLConverter
                         sqlTable = new BmSQLTableDataType();
                         sqlTable.TableName = row[col].ToString();
                         DataTable fields = m_sqlCnn.sqlCNN.GetSchema(SqlClientMetaDataCollectionNames.Columns, new string[] { null, null, sqlTable.TableName });
-                        foreach (DataRow dr in fields.Rows)
+                        try
                         {
-                            BmSQLColumnDataType sqlColumn = new BmSQLColumnDataType();
-                            sqlColumn.ColName = dr["COLUMN_NAME"].ToString();
-                           // sqlColumn.updateDataType(dr[7].ToString());
-                            Debug.WriteLine(sqlColumn.ColName);
-                            //get column type
-                            string sql = "SELECT + ["  + sqlColumn.ColName + "] FROM [" + sqlTable.TableName+ "]";
-                            SqlCommand sqlCMD = new SqlCommand(sql, m_sqlCnn.sqlCNN);
-                            SqlDataReader sqlReader = sqlCMD.ExecuteReader(CommandBehavior.KeyInfo);
-                            DataTable schemaDataType = sqlReader.GetSchemaTable();
-                            //foreach (ForeignKeyConstraint fk in schemaDataType.Constraints)
-                            //{
-                            //    Debug.WriteLine("Contraints: " + fk.RelatedColumns[0] +  " - " + fk.RelatedColumns[1]);
-                            //}
-                            //foreach (DataRow type in schemaDataType.Rows)
-                            if (schemaDataType.Rows.Count > 0)
+                            foreach (DataRow dr in fields.Rows)
                             {
-                                DataRow type = schemaDataType.Rows[0];
-                                
-                                foreach (DataColumn property in schemaDataType.Columns)
+                                BmSQLColumnDataType sqlColumn = new BmSQLColumnDataType();
+                                sqlColumn.ColName = dr["COLUMN_NAME"].ToString();
+                                // sqlColumn.updateDataType(dr[7].ToString());
+                                Debug.WriteLine(sqlColumn.ColName);
+                                //get column type
+                                string sql = "SELECT + [" + sqlColumn.ColName + "] FROM [" + sqlTable.TableName + "]";
+                                SqlCommand sqlCMD = new SqlCommand(sql, m_sqlCnn.sqlCNN);
+                                SqlDataReader sqlReader = sqlCMD.ExecuteReader(CommandBehavior.KeyInfo);
+                                DataTable schemaDataType = sqlReader.GetSchemaTable();
+                                //foreach (ForeignKeyConstraint fk in schemaDataType.Constraints)
+                                //{
+                                //    Debug.WriteLine("Contraints: " + fk.RelatedColumns[0] +  " - " + fk.RelatedColumns[1]);
+                                //}
+                                //foreach (DataRow type in schemaDataType.Rows)
+                                if (schemaDataType.Rows.Count > 0)
                                 {
+                                    DataRow type = schemaDataType.Rows[0];
 
-                                    Debug.WriteLine(property.ColumnName + " : " + type[property].ToString());
-                                    if (property.ColumnName.Equals("DataTypeName"))
+                                    foreach (DataColumn property in schemaDataType.Columns)
                                     {
-                                        sqlColumn.updateDataType(type[property].ToString());
+
+                                        Debug.WriteLine(property.ColumnName + " : " + type[property].ToString());
+                                        if (property.ColumnName.Equals("DataTypeName"))
+                                        {
+                                            sqlColumn.updateDataType(type[property].ToString());
+                                        }
+                                        else
+                                        if (property.ColumnName.Equals("NumericPrecision"))
+                                        {
+                                            sqlColumn.NumericPrecision = Int16.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("NumericScale"))
+                                        {
+                                            sqlColumn.NumericScale = Int16.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("IsUnique"))
+                                        {
+                                            sqlColumn.IsUnique = Boolean.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("IsKey"))
+                                        {
+                                            sqlColumn.IsKey = Boolean.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("IsIdentity"))
+                                        {
+                                            sqlColumn.IsIdentity = Boolean.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("IsAutoIncrement"))
+                                        {
+                                            sqlColumn.IsAutoIncrement = Boolean.Parse(type[property].ToString());
+                                        }
+                                        else if (property.ColumnName.Equals("IsReadOnly"))
+                                        {
+                                            sqlColumn.IsReadOnly = Boolean.Parse(type[property].ToString());
+                                        }
+
                                     }
-                                    else
-                                    if (property.ColumnName.Equals("NumericPrecision"))
-                                    {
-                                        sqlColumn.NumericPrecision = Int16.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("NumericScale"))
-                                    {
-                                        sqlColumn.NumericScale = Int16.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("IsUnique"))
-                                    {
-                                        sqlColumn.IsUnique = Boolean.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("IsKey"))
-                                    {
-                                        sqlColumn.IsKey = Boolean.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("IsIdentity"))
-                                    {
-                                        sqlColumn.IsIdentity = Boolean.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("IsAutoIncrement"))
-                                    {
-                                        sqlColumn.IsAutoIncrement = Boolean.Parse(type[property].ToString());
-                                    }
-                                    else if (property.ColumnName.Equals("IsReadOnly"))
-                                    {
-                                        sqlColumn.IsReadOnly = Boolean.Parse(type[property].ToString());
-                                    }
-                                    
                                 }
+
+                                sqlReader.Close();
+
+                                string sql2 = "SELECT f.name AS foreign_key_name ,OBJECT_NAME(f.parent_object_id) AS table_name " +
+                                          ", COL_NAME(fc.parent_object_id, fc.parent_column_id) AS constraint_column_name" +
+                                          "  , OBJECT_NAME (f.referenced_object_id) AS referenced_object " +
+                                           "  , COL_NAME(fc.referenced_object_id, fc.referenced_column_id) AS referenced_column_name " +
+                                        "FROM sys.foreign_keys AS f " +
+                                        "INNER JOIN sys.foreign_key_columns AS fc " +
+                                         "  ON f.object_id = fc.constraint_object_id " +
+                                        "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.TableName + "') AND COL_NAME(fc.referenced_object_id, fc.referenced_column_id) = '" + sqlColumn.ColName + "'; ";
+                                SqlCommand sqlCMD2 = new SqlCommand(sql2, m_sqlCnn.sqlCNN);
+                                SqlDataReader sqlReader2 = sqlCMD2.ExecuteReader();
+                                while (sqlReader2.Read())
+                                {
+                                    string foreign_key_name = sqlReader2["foreign_key_name"].ToString();
+                                    string parent_table_name = sqlReader2["referenced_object"].ToString();
+                                    string referenced_column_name = sqlReader2["referenced_column_name"].ToString();
+                                    string constraint_column_name = sqlReader2["constraint_column_name"].ToString();
+                                    sqlColumn.IsForeignKey = true;
+                                    sqlColumn.ParentTableName = parent_table_name;
+                                    sqlColumn.ReferenceColName = referenced_column_name;
+                                    Debug.WriteLine("Forign Key: " + foreign_key_name);
+                                    Debug.WriteLine("Parent Table: " + parent_table_name + " - Column Constraint:" + constraint_column_name + " --- Ref: " + referenced_column_name);
+                                }
+                                sqlReader2.Close();
+
+
+                                sqlTable.Columns.Add(sqlColumn);
                             }
-                            
-                            sqlReader.Close();
-
-                            string sql2 = "SELECT f.name AS foreign_key_name ,OBJECT_NAME(f.parent_object_id) AS table_name " +
-                                      ", COL_NAME(fc.parent_object_id, fc.parent_column_id) AS constraint_column_name" +
-                                      "  , OBJECT_NAME (f.referenced_object_id) AS referenced_object " +
-                                       "  , COL_NAME(fc.referenced_object_id, fc.referenced_column_id) AS referenced_column_name " +
-                                    "FROM sys.foreign_keys AS f " +
-                                    "INNER JOIN sys.foreign_key_columns AS fc " +
-                                     "  ON f.object_id = fc.constraint_object_id " +
-                                    "WHERE f.parent_object_id = OBJECT_ID('" + sqlTable.TableName + "') AND COL_NAME(fc.referenced_object_id, fc.referenced_column_id) = '" + sqlColumn.ColName+ "'; ";
-                            SqlCommand sqlCMD2 = new SqlCommand(sql2, m_sqlCnn.sqlCNN);
-                            SqlDataReader sqlReader2 = sqlCMD2.ExecuteReader();
-                            while (sqlReader2.Read())
-                            {
-                                string foreign_key_name = sqlReader2["foreign_key_name"].ToString();
-                                string parent_table_name = sqlReader2["referenced_object"].ToString();
-                                string referenced_column_name = sqlReader2["referenced_column_name"].ToString();
-                                string constraint_column_name = sqlReader2["constraint_column_name"].ToString();
-                                sqlColumn.IsForeignKey = true;
-                                sqlColumn.ParentTableName = parent_table_name;
-                                sqlColumn.ReferenceColName = referenced_column_name;
-                                Debug.WriteLine("Forign Key: " + foreign_key_name);
-                                Debug.WriteLine("Parent Table: " + parent_table_name + " - Column Constraint:" + constraint_column_name + " --- Ref: " + referenced_column_name);
-                            }
-                            sqlReader2.Close();
-
-
-                            sqlTable.Columns.Add(sqlColumn);
                         }
+                        catch (Exception ex)
+                        { }
+                        
                         
                         
                     }

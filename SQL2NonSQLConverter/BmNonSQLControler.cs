@@ -316,7 +316,9 @@ namespace SQL2NonSQLConverter
                 int rowIndex = 0;
                 foreach (BmSQLDataRow row in table.Data)
                 {
-                    var myObject = Activator.CreateInstance(myclass.GetType());
+                    try
+                    {
+                        var myObject = Activator.CreateInstance(myclass.GetType());
                     string primeyKeyValue = "";
                     TreeNode subNodeRow = new TreeNode();
                     subNodeRow.Text = "row " + rowIndex++;
@@ -400,7 +402,11 @@ namespace SQL2NonSQLConverter
                     }
                     nodeData.Nodes.Add(subNodeRow);
                     isUpdateTree = true;
-                    collection.Insert(myObject);
+                   
+                        collection.Insert(myObject);
+                    }
+                    catch (Exception ex) { }
+                    
                 }
 
 
