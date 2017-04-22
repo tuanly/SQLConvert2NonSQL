@@ -209,9 +209,10 @@ namespace SQL2NonSQLConverter
             tree.Nodes.Clear();
             //check include tables
             m_treeData.Nodes.Clear();
+            int removeTableIndex = 0;
             foreach (BmSQLTableDataType table in tables)
             {
-                int removeTableIndex = 0;
+               
                 int numForeignKey = 0;
                 string stParentTableName = "";
                 string stForeignKeyName = "";
@@ -223,10 +224,11 @@ namespace SQL2NonSQLConverter
                         stParentTableName = col.ParentTableName;
                         stForeignKeyName = col.ColName;
                     }
-                    if (numForeignKey == 0) removeTableIndex++;
+                    
 
 
                 }
+                
                 if (numForeignKey == 1)
                 {
                     bool noParent = false;
@@ -266,7 +268,8 @@ namespace SQL2NonSQLConverter
                         }
                     }
                 }
-                
+                removeTableIndex++;
+
             }
             bool resutl = true;
             foreach (BmSQLTableDataType table in tables)
