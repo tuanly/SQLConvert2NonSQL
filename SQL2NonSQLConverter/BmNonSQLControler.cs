@@ -363,7 +363,7 @@ namespace SQL2NonSQLConverter
                                     else if (newRow.ColTypes[j] == typeof(int))
                                         subArray.Add(new BsonDocument() { { newRow.ColNames[j], Int32.Parse(newRow.ColValues[j]) } });
                                     else
-                                        subArray.Add(new BsonDocument() { { newRow.ColNames[j], null } });
+                                        subArray.Add(new BsonDocument() { { newRow.ColNames[j], "" } });
                                     TreeNode subChildNode3 = new TreeNode();
                                     subChildNode3.Text = newRow.ColNames[j] + " : " + convertDataName(newRow.ColTypes[j]);
                                     subNode.Nodes.Add(subChildNode3);
